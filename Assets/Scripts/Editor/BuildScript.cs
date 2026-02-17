@@ -16,7 +16,7 @@ public class BuildScript
     {
         BuildPipeline.BuildPlayer(
             new[] { "Assets/Scenes/Test Scene.unity" },
-            "Build/mac/Game.exe",
+            "build/StandaloneOSX/Game.app",   // match buildsPath in workflow
             BuildTarget.StandaloneOSX,
             BuildOptions.None
         );
