@@ -26,6 +26,7 @@ jobs:
         env:
           UNITY_USERNAME: ${{ secrets.UNITY_USERNAME }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           unityVersion: 6000.3.8f1
           targetPlatform: StandaloneWindows64
