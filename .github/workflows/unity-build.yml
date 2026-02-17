@@ -30,14 +30,9 @@ jobs:
       # 3. Build project
       - name: Build Unity Project
         uses: game-ci/unity-builder@v4
-        env:
-          UNITY_USERNAME: ${{ secrets.UNITY_USERNAME }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           unityVersion: 6000.3.8f1
           license: personal
-          username: ${{ secrets.UNITY_USERNAME }}
-          password: ${{ secrets.UNITY_PASSWORD }}
           targetPlatform: ${{ matrix.targetPlatform }}
           buildMethod: BuildScript.BuildWindows  # change per platform if needed
           buildPath: build/${{ matrix.targetPlatform }}
