@@ -29,12 +29,12 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           unityVersion: 6000.3.8f1
-          targetPlatform: StandaloneWindows64
-          buildMethod: BuildScript.BuildWindows
-          buildsPath: build/StandaloneWindows64
+          targetPlatform: StandaloneOSX
+          buildMethod: BuildScript.BuildMac
+          buildsPath: build/StandaloneOSX
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: WindowsBuild
-          path: build/StandaloneWindows64
+          name: MacBuild
+          path: build/StandaloneOSX
