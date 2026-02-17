@@ -9,37 +9,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        targetPlatform: [ StandaloneWindows64, Android, WebGL ]
-
     steps:
-      # 1. Checkout repository
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
           lfs: true
 
-      # 2. Cache Library folder to speed up builds
-      - name: Cache Library
+      - name: Cache Library folder
         uses: actions/cache@v3
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
 
-      # 3. Build project
       - name: Build Unity Project
         uses: game-ci/unity-builder@v4
+        env:
+          UNITY_USERNAME: ${{ secrets.UNITY_USERNAME }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           unityVersion: 6000.3.8f1
-          license: personal
-          targetPlatform: ${{ matrix.targetPlatform }}
-          buildMethod: BuildScript.BuildWindows  # change per platform if needed
-          buildPath: build/${{ matrix.targetPlatform }}
+          targetPlatform: StandaloneWindows64
+          buildMethod: BuildScript.BuildWindows
+          buildsPath: build/StandaloneWindows64
 
-      # 4. Upload build artifact
-      - name: Upload Build
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Build-${{ matrix.targetPlatform }}
-          path: build/${{ matrix.targetPlatform }}
+          name: WindowsBuild
+          path: build/StandaloneWindows64
